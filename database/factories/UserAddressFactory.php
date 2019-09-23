@@ -9,4 +9,5 @@ $factory->define(UserAddress::class, function (Faker $faker) {
     return [
         //
     ];
+    
 });
