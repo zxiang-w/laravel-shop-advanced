@@ -5,19 +5,28 @@ namespace App\Admin\Controllers;
 use App\Models\Order;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
+use Encore\Admin\Show;
 
 class OrdersController extends Controller
 {
     use HasResourceActions;
 
+    /**
+     * Index interface.
+     *
+     * @param Content $content
+     * @return Content
+     */
     public function index(Content $content)
     {
         return $content
             ->header('订单列表')
             ->body($this->grid());
     }
+
 
     protected function grid()
     {
@@ -53,4 +62,13 @@ class OrdersController extends Controller
 
         return $grid;
     }
+    
+    public function show(Order $order, Content $content)
+    {
+        return $content
+            ->header('查看订单')
+            // body 方法可以接受 Laravel 的视图作为参数
+            ->body(view('admin.orders.show', ['order' => $order]));
+    }
+    
 }
