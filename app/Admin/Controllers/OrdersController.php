@@ -12,6 +12,7 @@ use Encore\Admin\Show;
 use Illuminate\Http\Request;
 use App\Exceptions\InvalidRequestException;
 
+
 class OrdersController extends Controller
 {
     use HasResourceActions;
