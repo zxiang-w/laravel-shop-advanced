@@ -16,6 +16,9 @@ class OrderService
 {
     public function store(User $user, UserAddress $address, $remark, $items, CouponCode $coupon = null)
     {
+        if ($coupon) {
+            $coupon->checkAvailable($user);
+        }
         // 开启一个数据库事务
         $order = \DB::transaction(function () use ($user, $address, $remark, $items,$coupon) {
             // 更新此地址的最后使用时间
