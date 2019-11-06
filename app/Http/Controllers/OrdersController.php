@@ -11,12 +11,24 @@ use App\Http\Requests\SendReviewRequest;
 use App\Models\CouponCode;
 use App\Models\UserAddress;
 use App\Models\Order;
+use App\Services\OrderService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Services\OrderService;
 
 class OrdersController extends Controller
 {
+    public function index(Request $request)
+    {
+        $orders = Order::query()
+            // 使用 with 方法预加载，避免N + 1问题
+            ->with(['items.product', 'items.productSku'])
+            ->where('user_id', $request->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate();
+
+        return view('orders.index', ['orders' => $orders]);
+    }
+
     public function store(OrderRequest $request, OrderService $orderService)
     {
         $user    = $request->user();
@@ -34,21 +46,10 @@ class OrdersController extends Controller
         return $orderService->store($user, $address, $request->input('remark'), $request->input('items'), $coupon);
     }
 
-    public function index(Request $request)
-    {
-        $orders = Order::query()
-            // 使用 with 方法预加载，避免N + 1问题
-            ->with(['items.product', 'items.productSku'])
-            ->where('user_id', $request->user()->id)
-            ->orderBy('created_at', 'desc')
-            ->paginate();
-
-        return view('orders.index', ['orders' => $orders]);
-    }
-
     public function show(Order $order, Request $request)
     {
         $this->authorize('own', $order);
+
         return view('orders.show', ['order' => $order->load(['items.productSku', 'items.product'])]);
     }
 
@@ -65,7 +66,6 @@ class OrdersController extends Controller
         // 更新发货状态为已收到
         $order->update(['ship_status' => Order::SHIP_STATUS_RECEIVED]);
 
-        // 返回订单信息
         return $order;
     }
 

@@ -14,12 +14,6 @@ class UsersController extends Controller
 {
     use HasResourceActions;
 
-    /**
-     * Index interface.
-     *
-     * @param Content $content
-     * @return Content
-     */
     public function index(Content $content)
     {
         return $content
@@ -27,11 +21,6 @@ class UsersController extends Controller
             ->body($this->grid());
     }
 
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
     protected function grid()
     {
         $grid = new Grid(new User);

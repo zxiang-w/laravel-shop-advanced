@@ -27,13 +27,6 @@ class CouponCodesController extends Controller
             ->body($this->grid());
     }
 
-    /**
-     * Edit interface.
-     *
-     * @param mixed $id
-     * @param Content $content
-     * @return Content
-     */
     public function edit($id, Content $content)
     {
         return $content
@@ -41,12 +34,6 @@ class CouponCodesController extends Controller
             ->body($this->form()->edit($id));
     }
 
-    /**
-     * Create interface.
-     *
-     * @param Content $content
-     * @return Content
-     */
     public function create(Content $content)
     {
         return $content
@@ -54,11 +41,6 @@ class CouponCodesController extends Controller
             ->body($this->form());
     }
 
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
     protected function grid()
     {
         $grid = new Grid(new CouponCode);
@@ -82,11 +64,6 @@ class CouponCodesController extends Controller
         return $grid;
     }
 
-    /**
-     * Make a form builder.
-     *
-     * @return Form
-     */
     protected function form()
     {
         $form = new Form(new CouponCode);
@@ -101,9 +78,9 @@ class CouponCodesController extends Controller
                 return 'nullable|unique:coupon_codes';
             }
         });
-        $form->radio('type', '类型')->options(CouponCode::$typeMap)->rules('required');
+        $form->radio('type', '类型')->options(CouponCode::$typeMap)->rules('required')->default(CouponCode::TYPE_FIXED);
         $form->text('value', '折扣')->rules(function ($form) {
-            if ($form->model()->type === CouponCode::TYPE_PERCENT) {
+            if (request()->input('type') === CouponCode::TYPE_PERCENT) {
                 // 如果选择了百分比折扣类型，那么折扣范围只能是 1 ~ 99
                 return 'required|numeric|between:1,99';
             } else {

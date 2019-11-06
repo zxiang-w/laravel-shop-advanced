@@ -32,7 +32,7 @@ Laravel Shop 功能如下：
 -   优雅地处理 Laravel 项目中的异常；
 -   事件与监听器的使用；
 -   使用授权策略来控制权限；
--   使用 overtrue/laravel-lang 来汉化错误信息；
+-   使用 overtrue/laravel-lang 来汉化错误信息；
 -   laravel-admin 扩展包的安装与配置；
 -   使用 laravel-admin 快速构建对模型的增删改查功能；
 -   使用 laravel-admin 配置后台用户角色、权限；

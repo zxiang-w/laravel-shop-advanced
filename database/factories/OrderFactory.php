@@ -1,5 +1,7 @@
 <?php
 
+/* @var $factory \Illuminate\Database\Eloquent\Factory */
+
 use App\Models\CouponCode;
 use App\Models\Order;
 use App\Models\User;

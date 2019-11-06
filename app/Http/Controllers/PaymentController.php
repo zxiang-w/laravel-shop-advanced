@@ -28,6 +28,25 @@ class PaymentController extends Controller
         ]);
     }
 
+    public function payByWechat(Order $order, Request $request) {
+        $this->authorize('own', $order);
+        if ($order->paid_at || $order->closed) {
+            throw new InvalidRequestException('订单状态不正确');
+        }
+
+        // 之前是直接返回，现在把返回值放到一个变量里
+        $wechatOrder = app('wechat_pay')->scan([
+            'out_trade_no' => $order->no,
+            'total_fee'    => $order->total_amount * 100,
+            'body'         => '支付 Laravel Shop 的订单：'.$order->no,
+        ]);
+        // 把要转换的字符串作为 QrCode 的构造函数参数
+        $qrCode = new QrCode($wechatOrder->code_url);
+
+        // 将生成的二维码图片数据以字符串形式输出，并带上相应的响应类型
+        return response($qrCode->writeString(), 200, ['Content-Type' => $qrCode->getContentType()]);
+    }
+
     public function alipayReturn()
     {
         try {
@@ -44,7 +63,7 @@ class PaymentController extends Controller
         // 校验输入参数
         $data  = app('alipay')->verify();
         // 如果订单状态不是成功或者结束，则不走后续的逻辑
-        // 所有校验状态：https://docs.open.alipay.com/59/103672
+        // 所有交易状态：https://docs.open.alipay.com/59/103672
         if(!in_array($data->trade_status, ['TRADE_SUCCESS', 'TRADE_FINISHED'])) {
             return app('alipay')->success();
         }
@@ -68,26 +87,6 @@ class PaymentController extends Controller
         $this->afterPaid($order);
 
         return app('alipay')->success();
-    }
-
-    public function payByWechat(Order $order, Request $request)
-    {
-        $this->authorize('own', $order);
-        if ($order->paid_at || $order->closed) {
-            throw new InvalidRequestException('订单状态不正确');
-        }
-
-        // 之前是直接返回，现在把返回值放到一个变量里
-        $wechatOrder = app('wechat_pay')->scan([
-            'out_trade_no' => $order->no,
-            'total_fee'    => $order->total_amount * 100,
-            'body'         => '支付 Laravel Shop 的订单：'.$order->no,
-        ]);
-        // 把要转换的字符串作为 QrCode 的构造函数参数
-        $qrCode = new QrCode($wechatOrder->code_url);
-
-        // 将生成的二维码图片数据以字符串形式输出，并带上相应的响应类型
-        return response($qrCode->writeString(), 200, ['Content-Type' => $qrCode->getContentType()]);
     }
 
     public function wechatNotify()
@@ -117,19 +116,14 @@ class PaymentController extends Controller
         return app('wechat_pay')->success();
     }
 
-    protected function afterPaid(Order $order)
-    {
-        event(new OrderPaid($order));
-    }
-
     public function wechatRefundNotify(Request $request)
     {
         // 给微信的失败响应
         $failXml = '<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[FAIL]]></return_msg></xml>';
-        $data    = app('wechat_pay')->verify(null, true);
+        $data = app('wechat_pay')->verify(null, true);
 
         // 没有找到对应的订单，原则上不可能发生，保证代码健壮性
-        if (!$order = Order::where('no', $data['out_trade_no'])->first()) {
+        if(!$order = Order::where('no', $data['out_trade_no'])->first()) {
             return $failXml;
         }
 
@@ -140,14 +134,19 @@ class PaymentController extends Controller
             ]);
         } else {
             // 退款失败，将具体状态存入 extra 字段，并表退款状态改成失败
-            $extra                       = $order->extra;
+            $extra = $order->extra;
             $extra['refund_failed_code'] = $data['refund_status'];
             $order->update([
                 'refund_status' => Order::REFUND_STATUS_FAILED,
-                'extra'         => $extra
+                'extra' => $extra
             ]);
         }
 
         return app('wechat_pay')->success();
+    }
+
+    protected function afterPaid(Order $order)
+    {
+        event(new OrderPaid($order));
     }
 }

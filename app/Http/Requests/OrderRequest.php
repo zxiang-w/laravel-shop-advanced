@@ -16,7 +16,7 @@ class OrderRequest extends Request
                 'required',
                 Rule::exists('user_addresses', 'id')->where('user_id', $this->user()->id),
             ],
-            'items'          => ['required', 'array'],
+            'items'  => ['required', 'array'],
             'items.*.sku_id' => [ // 检查 items 数组下每一个子数组的 sku_id 参数
                 'required',
                 function ($attribute, $value, $fail) {

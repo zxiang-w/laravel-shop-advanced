@@ -18,11 +18,16 @@ return [
     'logo-mini' => '<b>LS</b>',
 
     /*
+     * Laravel-Admin 启动文件路径
+     */
+    'bootstrap' => app_path('Admin/bootstrap.php'),
+
+    /*
      * 路由配置
      */
     'route' => [
         // 路由前缀
-        'prefix' => 'admin',
+        'prefix' => env('ADMIN_ROUTE_PREFIX', 'admin'),
         // 控制器命名空间前缀
         'namespace' => 'App\\Admin\\Controllers',
         // 默认中间件列表
@@ -64,6 +69,18 @@ return [
                 'model'  => Encore\Admin\Auth\Database\Administrator::class,
             ],
         ],
+
+        // 是否展示 保持登录 选项
+        'remember' => true,
+
+        // 登录页面 URL
+        'redirect_to' => 'auth/login',
+
+        // 无需用户认证即可访问的地址
+        'excepts' => [
+            'auth/login',
+            'auth/logout',
+        ]
     ],
 
     /*
@@ -115,6 +132,10 @@ return [
      * Laravel-Admin 操作日志设置
      */
     'operation_log' => [
+        /*
+         * 只记录以下类型的请求
+         */
+        'allowed_methods' => ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH'],
 
         'enable' => true,
 

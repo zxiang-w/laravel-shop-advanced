@@ -1,5 +1,7 @@
 <?php
 
+/* @var $factory \Illuminate\Database\Eloquent\Factory */
+
 use App\Models\OrderItem;
 use App\Models\Product;
 use Faker\Generator as Faker;
