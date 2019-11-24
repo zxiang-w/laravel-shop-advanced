@@ -21,7 +21,7 @@
 
 LOCK TABLES `admin_menu` WRITE;
 /*!40000 ALTER TABLE `admin_menu` DISABLE KEYS */;
-INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,NULL),(2,0,4,'系统管理','fa-tasks','',NULL,NULL,'2019-09-25 13:37:18'),(3,2,5,'管理员','fa-users','auth/users',NULL,NULL,'2019-09-25 13:37:18'),(4,2,6,'角色','fa-user','auth/roles',NULL,NULL,'2019-09-25 13:37:18'),(5,2,7,'权限','fa-ban','auth/permissions',NULL,NULL,'2019-09-25 13:37:18'),(6,2,8,'菜单','fa-bars','auth/menu',NULL,NULL,'2019-09-25 13:37:18'),(7,2,9,'操作日志','fa-history','auth/logs',NULL,NULL,'2019-09-25 13:37:18'),(8,0,3,'用户菜单','fa-bars','users','*','2019-09-23 15:53:20','2019-09-25 13:37:18'),(9,0,2,'商品管理','fa-bars','products',NULL,'2019-09-25 13:37:03','2019-09-25 13:37:18'),(10,0,0,'订单管理','fa-bars','orders',NULL,'2019-10-09 14:29:56','2019-10-09 14:29:56'),(11,0,0,'优惠卷','fa-bars','coupon_codes',NULL,'2019-10-15 14:24:44','2019-10-15 14:24:44'),(12,0,0,'类目管理','fa-bars','categories',NULL,'2019-11-07 13:52:30','2019-11-07 13:52:30');
+INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,NULL),(2,0,6,'系统管理','fa-tasks','',NULL,NULL,'2019-11-24 11:13:02'),(3,2,7,'管理员','fa-users','auth/users',NULL,NULL,'2019-11-24 11:13:02'),(4,2,8,'角色','fa-user','auth/roles',NULL,NULL,'2019-11-24 11:13:02'),(5,2,9,'权限','fa-ban','auth/permissions',NULL,NULL,'2019-11-24 11:13:02'),(6,2,10,'菜单','fa-bars','auth/menu',NULL,NULL,'2019-11-24 11:13:02'),(7,2,11,'操作日志','fa-history','auth/logs',NULL,NULL,'2019-11-24 11:13:02'),(8,0,5,'用户菜单','fa-bars','users','*','2019-09-23 15:53:20','2019-11-24 11:13:02'),(9,13,3,'商品管理','fa-bars','products',NULL,'2019-09-25 13:37:03','2019-11-24 11:13:02'),(10,0,12,'订单管理','fa-bars','orders',NULL,'2019-10-09 14:29:56','2019-11-24 11:13:02'),(11,0,13,'优惠卷','fa-bars','coupon_codes',NULL,'2019-10-15 14:24:44','2019-11-24 11:13:02'),(12,0,14,'类目管理','fa-bars','categories',NULL,'2019-11-07 13:52:30','2019-11-24 11:13:02'),(13,0,2,'商品管理','fa-bars',NULL,NULL,'2019-11-24 11:12:11','2019-11-24 11:13:02'),(14,13,4,'众筹商品','fa-bars','crowdfunding_products',NULL,'2019-11-24 11:12:40','2019-11-24 11:13:02');
 /*!40000 ALTER TABLE `admin_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_role_menu` WRITE;
 /*!40000 ALTER TABLE `admin_role_menu` DISABLE KEYS */;
-INSERT INTO `admin_role_menu` VALUES (1,2,NULL,NULL),(1,8,NULL,NULL),(2,8,NULL,NULL),(1,9,NULL,NULL),(1,10,NULL,NULL),(1,11,NULL,NULL),(1,12,NULL,NULL);
+INSERT INTO `admin_role_menu` VALUES (1,2,NULL,NULL),(1,8,NULL,NULL),(2,8,NULL,NULL),(1,9,NULL,NULL),(1,10,NULL,NULL),(1,11,NULL,NULL),(1,12,NULL,NULL),(1,13,NULL,NULL),(1,14,NULL,NULL);
 /*!40000 ALTER TABLE `admin_role_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-07 14:02:56
+-- Dump completed on 2019-11-24 11:16:38
