@@ -61,12 +61,56 @@ body {
   }
 }
 
-.products-index-page, .products-favorites-page {
+.products-index-page,
+.products-favorites-page {
   .search-form {
     padding: 0 5px 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    .category-breadcrumb {
+      line-height: 28px;
+    }
+    .all-products {
+      font-size: 12px;
+      color: #666;
+      text-decoration: none;
+    }
+    .category {
+      font-size: 12px;
+      height: 22px;
+      border: 1px solid #eee;
+      padding: 4px;
+      color: #666;
+      a {
+        text-decoration: none;
+        color: #666;
+      }
+    }
   }
+  .filters {
+    font-size: 12px;
+    margin-bottom: 10px;
+    & > .row {
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      margin: 0 -20px;
+      .filter-key {
+        width: 150px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background: #f3f3f3;
+        color: #666;
+      }
+      .filter-values {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        a {
+          margin-right: 50px;
+          color: #666;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
   .pagination {
     margin-right: 5px;
   }
@@ -266,7 +310,9 @@ body {
       flex-direction: row;
       align-items: flex-start;
       font-size: 12px;
-      .product_title, .sku_title, .warning {
+      .product_title,
+      .sku_title,
+      .warning {
         display: block;
       }
 
@@ -275,7 +321,8 @@ body {
         font-size: 14px;
       }
       .not_on_sale {
-        .product_title, .sku_title {
+        .product_title,
+        .sku_title {
           text-decoration: line-through;
         }
         .warning {
@@ -326,7 +373,8 @@ body {
         border: 1px solid #eee;
         margin-right: 5px;
       }
-      .product-title, .sku-title {
+      .product-title,
+      .sku-title {
         display: block;
       }
       .product-title > a {
@@ -358,7 +406,8 @@ body {
       border: 1px solid #eee;
       margin-right: 5px;
     }
-    .product-title, .sku-title {
+    .product-title,
+    .sku-title {
       display: block;
     }
     .product-title > a {
@@ -396,7 +445,7 @@ body {
   }
   .order-summary {
     width: 50%;
-    font-family: Verdana,Tahoma,Helvetica,Arial;
+    font-family: Verdana, Tahoma, Helvetica, Arial;
     .total-amount {
       font-weight: bolder;
       font-size: 14px;
@@ -413,11 +462,14 @@ body {
     padding-right: 10px;
   }
 
-  .payment-buttons, .receive-button {
+  .payment-buttons,
+  .receive-button {
     margin-top: 10px;
     padding-right: 10px;
   }
-  .payment-buttons, .receive-button, .refund-button {
+  .payment-buttons,
+  .receive-button,
+  .refund-button {
     margin-top: 10px;
     padding-right: 10px;
   }
@@ -438,7 +490,8 @@ body {
       border: 1px solid #eee;
       margin-right: 5px;
     }
-    .product-title, .sku-title {
+    .product-title,
+    .sku-title {
       display: block;
     }
     .product-title > a {
@@ -465,7 +518,7 @@ body {
       & > input {
         position: absolute;
         top: -9999px;
-        clip: rect(0,0,0,0);
+        clip: rect(0, 0, 0, 0);
       }
       & > label {
         float: right;
@@ -478,10 +531,11 @@ body {
         font-size: 150%;
 
         &:before {
-          content: '★ ';
+          content: "★ ";
         }
       }
-      & > label:hover, & > label:hover ~ label {
+      & > label:hover,
+      & > label:hover ~ label {
         color: gold;
       }
     }
@@ -494,7 +548,11 @@ body {
       left: 2px;
     }
 
-    & > input:checked + label:hover, & > input:checked + label:hover ~ label, & > input:checked ~ label:hover, & > input:checked ~ label:hover ~ label, & > label:hover ~ input:checked ~ label {
+    & > input:checked + label:hover,
+    & > input:checked + label:hover ~ label,
+    & > input:checked ~ label:hover,
+    & > input:checked ~ label:hover ~ label,
+    & > label:hover ~ input:checked ~ label {
       color: gold;
     }
   }
