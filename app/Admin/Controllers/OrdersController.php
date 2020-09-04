@@ -11,6 +11,7 @@ use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Illuminate\Http\Request;
+use App\Models\CrowdfundingProduct;
 
 class OrdersController extends Controller
 {
@@ -41,6 +42,14 @@ class OrdersController extends Controller
         if ($order->ship_status !== Order::SHIP_STATUS_PENDING) {
             throw new InvalidRequestException('该订单已发货');
         }
+        // 众筹订单只有在众筹成功之后发货
+        if (
+            $order->type === Order::TYPE_CROWDFUNDING &&
+            $order->items[0]->product->crowdfunding->status !== CrowdfundingProduct::STATUS_SUCCESS
+        ) {
+            throw new InvalidRequestException('众筹订单只能在众筹成功之后发货');
+        }
+
         // Laravel 5.5 之后 validate 方法可以返回校验过的值
         $data = $this->validate($request, [
             'express_company' => ['required'],
@@ -103,10 +112,10 @@ class OrdersController extends Controller
         $grid->column('user.name', '买家');
         $grid->total_amount('总金额')->sortable();
         $grid->paid_at('支付时间')->sortable();
-        $grid->ship_status('物流')->display(function($value) {
+        $grid->ship_status('物流')->display(function ($value) {
             return Order::$shipStatusMap[$value];
         });
-        $grid->refund_status('退款状态')->display(function($value) {
+        $grid->refund_status('退款状态')->display(function ($value) {
             return Order::$refundStatusMap[$value];
         });
         // 禁用创建按钮，后台不需要创建订单
@@ -177,7 +186,7 @@ class OrdersController extends Controller
                 break;
             default:
                 // 原则上不可能出现，这个只是为了代码健壮性
-                throw new InternalException('未知订单支付方式：'.$order->payment_method);
+                throw new InternalException('未知订单支付方式：' . $order->payment_method);
                 break;
         }
     }
