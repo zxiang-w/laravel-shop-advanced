@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for osx10.14 (x86_64)
 --
--- Host: localhost    Database: laravel-shop-58
+-- Host: 127.0.0.1    Database: laravel-shop
 -- ------------------------------------------------------
--- Server version	5.7.21-0ubuntu0.16.04.1
+-- Server version	8.0.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 LOCK TABLES `admin_menu` WRITE;
 /*!40000 ALTER TABLE `admin_menu` DISABLE KEYS */;
-INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,'2019-04-20 08:46:24'),(2,0,6,'系统管理','fa-tasks',NULL,NULL,NULL,'2019-04-20 08:46:38'),(3,2,7,'管理员','fa-users','auth/users',NULL,NULL,'2019-04-20 08:47:04'),(4,2,8,'角色','fa-user','auth/roles',NULL,NULL,'2019-04-20 08:46:05'),(5,2,9,'权限','fa-ban','auth/permissions',NULL,NULL,'2019-04-20 08:46:46'),(6,2,10,'菜单','fa-bars','auth/menu',NULL,NULL,'2019-04-20 08:46:52'),(7,2,11,'操作日志','fa-history','auth/logs',NULL,NULL,'2019-04-20 08:46:58'),(8,0,3,'商品管理','fa-cubes','/products',NULL,'2019-04-20 08:44:59','2019-04-20 08:50:34'),(9,0,2,'用户管理','fa-users','/users',NULL,'2019-04-20 08:45:14','2019-04-20 08:50:34'),(10,0,4,'订单管理','fa-rmb','/orders',NULL,'2019-04-20 08:45:25','2019-04-20 08:45:45'),(11,0,5,'优惠券管理','fa-tags','/coupon_codes',NULL,'2019-04-20 08:45:39','2019-04-20 08:45:45');
+INSERT INTO `admin_menu` VALUES (1,0,1,'Index','fa-bar-chart','/',NULL,NULL,NULL),(2,0,2,'Admin','fa-tasks','',NULL,NULL,NULL),(3,2,3,'Users','fa-users','auth/users',NULL,NULL,NULL),(4,2,4,'Roles','fa-user','auth/roles',NULL,NULL,NULL),(5,2,5,'Permission','fa-ban','auth/permissions',NULL,NULL,NULL),(6,2,6,'Menu','fa-bars','auth/menu',NULL,NULL,NULL),(7,2,7,'Operation log','fa-history','auth/logs',NULL,NULL,NULL),(8,0,0,'商品类目','fa-bars','categories','*','2020-09-03 19:20:41','2020-09-03 19:21:03');
 /*!40000 ALTER TABLE `admin_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_permissions` WRITE;
 /*!40000 ALTER TABLE `admin_permissions` DISABLE KEYS */;
-INSERT INTO `admin_permissions` VALUES (1,'All permission','*','','*',NULL,NULL),(2,'Dashboard','dashboard','GET','/',NULL,NULL),(3,'Login','auth.login','','/auth/login\r\n/auth/logout',NULL,NULL),(4,'User setting','auth.setting','GET,PUT','/auth/setting',NULL,NULL),(5,'Auth management','auth.management','','/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs',NULL,NULL),(6,'用户管理','users','','/users*','2019-04-20 08:49:46','2019-04-20 08:49:46'),(7,'商品管理','products','','/products*','2019-04-20 08:50:02','2019-04-20 08:50:02'),(8,'订单管理','orders','','/orders*','2019-04-20 08:50:15','2019-04-20 08:50:15'),(9,'优惠券管理','coupon_codes','','/coupon_codes*','2019-04-20 08:50:26','2019-04-20 08:50:26');
+INSERT INTO `admin_permissions` VALUES (1,'All permission','*','','*',NULL,NULL),(2,'Dashboard','dashboard','GET','/',NULL,NULL),(3,'Login','auth.login','','/auth/login\r\n/auth/logout',NULL,NULL),(4,'User setting','auth.setting','GET,PUT','/auth/setting',NULL,NULL),(5,'Auth management','auth.management','','/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs',NULL,NULL);
 /*!40000 ALTER TABLE `admin_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_role_menu` WRITE;
 /*!40000 ALTER TABLE `admin_role_menu` DISABLE KEYS */;
-INSERT INTO `admin_role_menu` VALUES (1,2,NULL,NULL);
+INSERT INTO `admin_role_menu` VALUES (1,2,NULL,NULL),(1,8,NULL,NULL);
 /*!40000 ALTER TABLE `admin_role_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,7 +51,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_role_permissions` WRITE;
 /*!40000 ALTER TABLE `admin_role_permissions` DISABLE KEYS */;
-INSERT INTO `admin_role_permissions` VALUES (1,1,NULL,NULL),(2,2,NULL,NULL),(2,3,NULL,NULL),(2,4,NULL,NULL),(2,6,NULL,NULL),(2,7,NULL,NULL),(2,8,NULL,NULL),(2,9,NULL,NULL);
+INSERT INTO `admin_role_permissions` VALUES (1,1,NULL,NULL);
 /*!40000 ALTER TABLE `admin_role_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_role_users` WRITE;
 /*!40000 ALTER TABLE `admin_role_users` DISABLE KEYS */;
-INSERT INTO `admin_role_users` VALUES (1,1,NULL,NULL),(2,2,NULL,NULL);
+INSERT INTO `admin_role_users` VALUES (1,1,NULL,NULL);
 /*!40000 ALTER TABLE `admin_role_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +71,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_roles` WRITE;
 /*!40000 ALTER TABLE `admin_roles` DISABLE KEYS */;
-INSERT INTO `admin_roles` VALUES (1,'Administrator','administrator','2019-04-20 08:43:06','2019-04-20 08:43:06'),(2,'运营','operator','2019-04-20 08:51:17','2019-04-20 08:51:17');
+INSERT INTO `admin_roles` VALUES (1,'Administrator','administrator','2020-09-03 17:27:26','2020-09-03 17:27:26');
 /*!40000 ALTER TABLE `admin_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `admin_users` WRITE;
 /*!40000 ALTER TABLE `admin_users` DISABLE KEYS */;
-INSERT INTO `admin_users` VALUES (1,'admin','$2y$10$1G3mEDi8ReQf9SGlsLdnUON1uIx8HbSiGpJ9VuPliCmkPlzrWKnoa','Administrator',NULL,'VIJXnRySG1UzYg2ydP7jzWV1A8oR7J8GEiTvDuMxD7SWxCxhbyFLyCFvc8JM','2019-04-20 08:43:06','2019-04-20 08:43:06'),(2,'operator','$2y$10$pYRpY9bu/pXhusY5uT5jquu9nk0qmnqeOKU8Eujp1aEC2MzjlWirS','运营',NULL,NULL,'2019-04-20 08:51:32','2019-04-20 08:51:32');
+INSERT INTO `admin_users` VALUES (1,'admin','$2y$10$FzGwdVJo9uVxtnXeXFbo8uay7FX1zkTxtjo8CtJAvxFJZ8RbXfE3u','Administrator',NULL,'4nsmyOOPq4GamJq2pOMUnrcAgVHXQMtoHol37OtWMpaSDtQ5AlL1zS6N8LKA','2020-09-03 17:27:26','2020-09-03 17:27:26');
 /*!40000 ALTER TABLE `admin_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -103,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-20  8:51:46
+-- Dump completed on 2020-09-04 11:41:59
